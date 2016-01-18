@@ -1,5 +1,5 @@
-页面路由
+page route
 http://localhost/ERP/View.php/Base/Base_1/Page1
 
-取数路由
+data route
 http://localhost/ERP/Data.php/Base/Base_1/Execute
