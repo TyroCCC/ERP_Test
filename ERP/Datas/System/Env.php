@@ -19,7 +19,7 @@ function GetModule(){
 function GetTreeMenuByModuleId(){
 	// mysql_real_escape_string
 	$ModuleId = ToolMethod::Instance()->GetUrlParam("ModuleId");
-	$sql = "select tb1.MenuId,tb1.PageId,tb2.PageName,tb2.ModuleId,tb2.Controller,tb2.Action,tb2.OuterLink
+	$sql = "select tb1.MenuId,tb1.ParentMenuId,tb1.PageId,tb2.PageName,tb2.ModuleId,tb2.Controller,tb2.Action,tb2.OuterLink
 		from(
 		     select * from config_menu where ModuleId='".$ModuleId."' and IsActive=1
 		) as tb1
@@ -36,7 +36,7 @@ function GetCustomTreeMenuByModuleId(){
 	if($UserId != ""){
 		$UserId = User::Instance()->GetUserId();//获取当前登录的UserId
 	}
-	$sql = "select tb1.MenuId,tb1.PageId,tb2.PageName,tb2.ModuleId,tb2.Controller,tb2.Action,tb2.OuterLink
+	$sql = "select tb1.MenuId,tb1.ParentMenuId,tb1.PageId,tb2.PageName,tb2.ModuleId,tb2.Controller,tb2.Action,tb2.OuterLink
 		from(
 		     select * from config_custom_menu where UserId='".$UserId."' and IsActive=1
 		) as tb1
