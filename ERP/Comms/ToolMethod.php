@@ -59,11 +59,42 @@ class ToolMethod{
 
 	//获取cookies
 	function GetCookies($name){
-		if($_COOKIE[$name]){
+		if(isset($_COOKIE[$name])){
 			return $_COOKIE[$name];
 		}
 		return "";
 	}
+
+	//设置cookies 天
+	function SetCookies($name, $val, $d){
+		$expire = time() + 60 * 60 * 24 * $d;
+		setcookie($name, json_encode($val), $expire);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	//获取 easyui 表格控件 页码 参数, 默认为 1 
 	function GetEasyUiDataGridPage(){

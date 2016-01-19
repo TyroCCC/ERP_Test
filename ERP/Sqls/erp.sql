@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.5.40)
-# Date: 2016-01-18 19:20:49
+# Date: 2016-01-19 21:35:34
 # Generator: MySQL-Front 5.3  (Build 4.120)
 
 /*!40101 SET NAMES utf8 */;
@@ -22,6 +22,25 @@ CREATE TABLE `config_btn` (
 #
 
 INSERT INTO `config_btn` VALUES ('1','EasyLib-Btn-Close','关闭','icon-clear',1),('2','EasyLib-Btn-Reload','刷新','icon-reload',1),('3','EasyLib-Btn-Print','打印','icon-print',1),('4','EasyLib-Btn-Search','查询','icon-search',1),('5','EasyLib-Btn-Add','新增','icon-add',1),('6','EasyLib-Btn-Remove','删除','icon-remove',1),('7','EasyLib-Btn-Edit','编辑','icon-edit',1),('8','EasyLib-Btn-Save','保存','icon-save',1),('9','EasyLib-Btn-Enter','确定','icon-ok',1);
+
+#
+# Structure for table "config_custom_menu"
+#
+
+CREATE TABLE `config_custom_menu` (
+  `MenuId` varchar(6) NOT NULL DEFAULT '' COMMENT '菜单Id',
+  `ParentMenuId` varchar(6) NOT NULL DEFAULT '' COMMENT '父菜单Id',
+  `UserId` varchar(20) NOT NULL DEFAULT '' COMMENT '所属用户Id',
+  `PageId` varchar(6) NOT NULL DEFAULT '' COMMENT '关联的页面Id',
+  `IsActive` int(11) NOT NULL DEFAULT '1' COMMENT '是否激活',
+  `Seq` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
+  PRIMARY KEY (`MenuId`)
+) ENGINE=InnoDB DEFAULT CHARSET=gbk COMMENT='用户自定义菜单';
+
+#
+# Data for table "config_custom_menu"
+#
+
 
 #
 # Structure for table "config_group"
@@ -79,6 +98,7 @@ CREATE TABLE `config_group_user` (
 CREATE TABLE `config_menu` (
   `MenuId` varchar(6) NOT NULL DEFAULT '' COMMENT '菜单Id',
   `ParentMenuId` varchar(6) NOT NULL DEFAULT '' COMMENT '父菜单Id',
+  `ModuleId` varchar(20) NOT NULL DEFAULT '' COMMENT '所属模块Id',
   `PageId` varchar(6) NOT NULL DEFAULT '' COMMENT '关联的页面Id',
   `IsActive` int(11) NOT NULL DEFAULT '1' COMMENT '是否激活',
   `Seq` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
@@ -89,13 +109,14 @@ CREATE TABLE `config_menu` (
 # Data for table "config_menu"
 #
 
+INSERT INTO `config_menu` VALUES ('100000','0','System','0',1,0),('100001','100000','System','0',1,0),('100002','100000','System','0',1,1),('100003','100001','System','100000',1,0),('100004','100001','System','100000',1,1),('100005','100001','System','100000',1,2),('100006','100002','System','100000',1,0),('100007','100002','System','100000',1,1),('100008','100002','System','100000',1,2),('100009','100002','System','100000',1,3),('100010','100002','System','100000',1,4);
 
 #
 # Structure for table "config_module"
 #
 
 CREATE TABLE `config_module` (
-  `ModuleId` varchar(6) NOT NULL DEFAULT '' COMMENT '模块Id',
+  `ModuleId` varchar(20) NOT NULL DEFAULT '' COMMENT '模块Id',
   `ModuleName` varchar(255) NOT NULL DEFAULT '' COMMENT '模块名',
   `IsActive` int(11) NOT NULL DEFAULT '1' COMMENT '是否激活',
   `Seq` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
@@ -106,6 +127,7 @@ CREATE TABLE `config_module` (
 # Data for table "config_module"
 #
 
+INSERT INTO `config_module` VALUES ('BaseData','基础数据',1,1),('Sale','销售',1,2),('Stock','库存',1,3),('System','系统配置',1,0);
 
 #
 # Structure for table "config_page"
@@ -114,11 +136,10 @@ CREATE TABLE `config_module` (
 CREATE TABLE `config_page` (
   `PageId` varchar(6) NOT NULL DEFAULT '' COMMENT '页面Id',
   `PageName` varchar(255) NOT NULL DEFAULT '' COMMENT '页面名字',
-  `ModuleId` varchar(6) NOT NULL DEFAULT '' COMMENT '所属模块Id',
-  `Route` varchar(255) DEFAULT '' COMMENT '全路径',
+  `ModuleId` varchar(20) NOT NULL DEFAULT '' COMMENT '所属模块Id',
+  `Controller` varchar(255) NOT NULL DEFAULT '' COMMENT '控制器',
+  `Action` varchar(255) NOT NULL DEFAULT '' COMMENT '方法',
   `OuterLink` varchar(255) DEFAULT '' COMMENT '外链接',
-  `Controller` varchar(255) DEFAULT '' COMMENT '控制器(MVC模式使用)',
-  `Action` varchar(255) DEFAULT '' COMMENT '方法(MVC模式使用)',
   `IsActive` int(11) NOT NULL DEFAULT '1' COMMENT '是否激活',
   PRIMARY KEY (`PageId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=gbk COMMENT='页面';
@@ -127,6 +148,7 @@ CREATE TABLE `config_page` (
 # Data for table "config_page"
 #
 
+INSERT INTO `config_page` VALUES ('100000','测试页面1','System','test','test','',1);
 
 #
 # Structure for table "config_page_btn"

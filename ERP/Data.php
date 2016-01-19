@@ -25,6 +25,7 @@ require_once('./Comms/Config.php');//配置信息
 require_once('./Comms/ToolMethod.php');//常用方法
 require_once('./Comms/SqlHelper.php');//数据库基础操作
 require_once('./Comms/DB.php');//本项目数据库操作
+require_once('./Comms/User.php');//本项目登录用户操作
 
 require_once("./Datas/".$module.'/'.$controller.'.php');//根据路由引入对应的php文件
 

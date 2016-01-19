@@ -23,6 +23,14 @@ class Config{
 		"database" => "erp"
 	);
 
+	//登录信息 Cookies 指定名字
+	public $LoginUser = array(
+		"UserId" => "_ERP_UserId",
+		"UserName" => "_ERP_UserName",
+		"UserToken" => "_ERP_Token",
+		"KeepTime" => 1//保持时间,单位天
+	);
+
 }
 
 ?>
