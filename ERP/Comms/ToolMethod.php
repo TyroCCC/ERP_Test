@@ -71,6 +71,34 @@ class ToolMethod{
 		setcookie($name, json_encode($val), $expire);
 	}
 
+	// 递归生成树数组
+	function GetTreeArr($arr, $pid='0') {
+		$tree = array();
+		foreach($arr as $row){
+			if($row["ParentMenuId"] == $pid){
+				$tmp = self::GetTreeArr($arr, $row['MenuId']);//递归调用
+				if($tmp){
+					$row["Children"] = $tmp;
+				}
+				$tree[] = $row;
+			}
+		}
+		return $tree;
+	}
+
+	//将 name、value 二维数组进行 转换
+	function TranMy2Arr($arr){
+		$result = array();
+		foreach ($arr as $key => $value) {
+			$tmp = array();
+			foreach ($value as $key1 => $value1) {
+				$tmp[$value1["name"]] = $value1["value"];
+			}
+			$result[] = $tmp;
+		}
+		return $result;
+	}
+
 
 
 

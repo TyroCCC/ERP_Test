@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.5.40)
-# Date: 2016-01-19 21:35:34
+# Date: 2016-01-20 21:50:57
 # Generator: MySQL-Front 5.3  (Build 4.120)
 
 /*!40101 SET NAMES utf8 */;
@@ -29,13 +29,15 @@ INSERT INTO `config_btn` VALUES ('1','EasyLib-Btn-Close','关闭','icon-clear',1
 
 CREATE TABLE `config_custom_menu` (
   `MenuId` varchar(6) NOT NULL DEFAULT '' COMMENT '菜单Id',
+  `MenuName` varchar(255) NOT NULL DEFAULT '' COMMENT '菜单名',
+  `NodeLevel` int(11) NOT NULL DEFAULT '0' COMMENT '树节点层级',
   `ParentMenuId` varchar(6) NOT NULL DEFAULT '' COMMENT '父菜单Id',
-  `UserId` varchar(20) NOT NULL DEFAULT '' COMMENT '所属用户Id',
+  `UserId` varchar(20) NOT NULL DEFAULT '' COMMENT '用户Id',
   `PageId` varchar(6) NOT NULL DEFAULT '' COMMENT '关联的页面Id',
   `IsActive` int(11) NOT NULL DEFAULT '1' COMMENT '是否激活',
   `Seq` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
   PRIMARY KEY (`MenuId`)
-) ENGINE=InnoDB DEFAULT CHARSET=gbk COMMENT='用户自定义菜单';
+) ENGINE=InnoDB DEFAULT CHARSET=gbk COMMENT='菜单';
 
 #
 # Data for table "config_custom_menu"
@@ -97,6 +99,8 @@ CREATE TABLE `config_group_user` (
 
 CREATE TABLE `config_menu` (
   `MenuId` varchar(6) NOT NULL DEFAULT '' COMMENT '菜单Id',
+  `MenuName` varchar(255) NOT NULL DEFAULT '' COMMENT '菜单名',
+  `NodeLevel` int(11) NOT NULL DEFAULT '0' COMMENT '树节点层级',
   `ParentMenuId` varchar(6) NOT NULL DEFAULT '' COMMENT '父菜单Id',
   `ModuleId` varchar(20) NOT NULL DEFAULT '' COMMENT '所属模块Id',
   `PageId` varchar(6) NOT NULL DEFAULT '' COMMENT '关联的页面Id',
@@ -109,7 +113,7 @@ CREATE TABLE `config_menu` (
 # Data for table "config_menu"
 #
 
-INSERT INTO `config_menu` VALUES ('100000','0','System','0',1,0),('100001','100000','System','0',1,0),('100002','100000','System','0',1,1),('100003','100001','System','100000',1,0),('100004','100001','System','100000',1,1),('100005','100001','System','100000',1,2),('100006','100002','System','100000',1,0),('100007','100002','System','100000',1,1),('100008','100002','System','100000',1,2),('100009','100002','System','100000',1,3),('100010','100002','System','100000',1,4);
+INSERT INTO `config_menu` VALUES ('100000','系统管理',0,'0','System','0',1,0),('100001','功能1',1,'100000','System','0',1,0),('100002','功能2',1,'100000','System','0',1,1),('100003','页面1',2,'100001','System','100000',1,0),('100004','页面1',2,'100001','System','100000',1,1),('100005','页面1',2,'100001','System','100000',1,2),('100006','页面1',2,'100002','System','100000',1,0),('100007','页面1',2,'100002','System','100000',1,1),('100008','页面1',2,'100002','System','100000',1,2),('100009','页面1',2,'100002','System','100000',1,3),('100010','页面1',2,'100002','System','100000',1,4),('100011','功能3',1,'100000','System','0',1,0),('100012','功能33',2,'100011','System','0',1,0),('100013','功能333',3,'100012','System','0',1,0),('100014','功能3333',4,'100013','System','0',1,0),('100015','功能33333',5,'100014','System','0',1,0);
 
 #
 # Structure for table "config_module"

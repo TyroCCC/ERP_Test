@@ -64,7 +64,7 @@ class SqlHelper{
 			$k = 0;
 			$rowStr = '{';
 			foreach ($row as $key => $value) {
-				$rowStr .= '"'.$fieldArr[$k].'":'.json_encode($value);//unicode编码
+				$rowStr .= '"'.$fieldArr[$k].'":'.($value != null ? json_encode($value) : json_encode(""));//unicode编码
 				if($k <= count($row) -2){
 					$rowStr .= ',';
 				}
@@ -114,7 +114,7 @@ class SqlHelper{
 		return $arr[$key];
 	}
 
-	//返回二维数组
+	//返回二维数组, 存储是 name、value 的字典
 	public function Get2Arr($sql){
 		$connect = self::Connect();
 		$result = mysql_query($sql, $connect);
