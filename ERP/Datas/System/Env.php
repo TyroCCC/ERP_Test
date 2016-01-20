@@ -28,14 +28,16 @@ function GetTreeMenuByModuleId(){
 		on tb1.PageId=tb2.PageId";
 
 		$result = DB::Instance()->Get2Arr($sql);
-		if(count($result) == 0){//没有数据
-			echo "[]";
+		if(!count($result)){//没有数据
+			echo "{}";
 		}
 		else{
 			$result = ToolMethod::Instance()->TranMy2Arr($result);
 			$result = ToolMethod::Instance()->GetTreeArr($result);
 			$result = json_encode($result);
 			$result = str_replace(":null", ':""', $result);
+			$result = ltrim($result, "[");
+			$result = rtrim($result, "]");
 			echo $result;
 		}
 }
