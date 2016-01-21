@@ -18,6 +18,9 @@ function GetModule(){
 // 获取树菜单数据
 function GetTreeMenuByModuleId(){
 	$ModuleId = ToolMethod::Instance()->GetUrlParam("ModuleId");
+	if($ModuleId == ""){
+		$ModuleId = ToolMethod::Instance()->GetPostParam("ModuleId");
+	}
 	$sql = "select tb1.MenuId,tb1.MenuName,tb1.NodeLevel,tb1.ParentMenuId,tb1.PageId,tb2.ModuleId,tb2.Controller,tb2.Action,tb2.OuterLink
 		from(
 		     select * from config_menu where ModuleId='".$ModuleId."' and IsActive=1
@@ -45,6 +48,9 @@ function GetTreeMenuByModuleId(){
 //获取用户自定义树数据
 function GetCustomTreeMenuByUserId(){
 	$UserId = ToolMethod::Instance()->GetUrlParam("UserId");
+	if($UserId == ""){
+		$UserId = ToolMethod::Instance()->GetPostParam("UserId");
+	}
 	$sql = "select tb1.MenuId,tb1.MenuName,tb1.NodeLevel,tb1.ParentMenuId,tb1.PageId,tb1.UserId,tb2.Controller,tb2.Action,tb2.OuterLink
 		from(
 		     select * from config_custom_menu where UserId='".$UserId."' and IsActive=1
@@ -72,6 +78,9 @@ function GetCustomTreeMenuByUserId(){
 // 获取 Page 数据
 function GetPageByPageId(){
 	$PageId = ToolMethod::Instance()->GetUrlParam("PageId");
+	if($PageId == ""){
+		$PageId = ToolMethod::Instance()->GetPostParam("PageId");
+	}
 	$sql = "select PageId,PageName,ModuleId,Controller,Action,OuterLink
 		from config_page
 		where IsActive=1 and PageId='".$PageId."'";
@@ -81,6 +90,9 @@ function GetPageByPageId(){
 //获取页面按钮数据
 function GetPageBtnByPageId(){
 	$PageId = ToolMethod::Instance()->GetUrlParam("PageId");
+	if($PageId == ""){
+		$PageId = ToolMethod::Instance()->GetPostParam("PageId");
+	}
 	$sql = "select tb2.BtnId,tb2.BtnClass,tb2.BtnName,tb2.BtnIcon
 			from(
 			     select * from config_page_btn
@@ -96,8 +108,11 @@ function GetPageBtnByPageId(){
 }
 
 //获取页面查询参数、显示字段数据
-function GetPageParamsAndByPageId(){
+function GetPageInitParamsByPageId(){
 	$PageId = ToolMethod::Instance()->GetUrlParam("PageId");
+	if($PageId == ""){
+		$PageId = ToolMethod::Instance()->GetPostParam("PageId");
+	}
 	$sql = "select PageId,QueryParams,ShowFields
 			from config_page_param
 			where PageId='".$PageId."'";
