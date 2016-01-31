@@ -99,6 +99,43 @@ class ToolMethod{
 		return $result;
 	}
 
+	//获取PageId
+	function GetPageId(){
+		$url = $_SERVER['HTTP_REFERER'];
+		$arr = explode("/", $url);
+		$PageId = $arr[count($arr) - 1];
+		$n = strrpos($PageId, "?");
+		if($n){
+			$PageId = substr($PageId, 0, $n);
+		}
+		else{
+			$PageId = substr($PageId, 0);
+		}
+		return $PageId;
+	}
+
+	//将数组转为json  [{},{}]
+	function Arr2Json($name, $arr){
+		$result = "";
+		foreach ($arr as $key => $value) {
+			if($value != ""){
+				$result .= '{"'.$name.'":"'.json_encode($value).'"},';
+			}
+		}
+		return "[".rtrim($result, ",")."]";
+	}
+
+	//将数组转为str  arr1,arr2,arr3
+	function Arr2Str($arr){
+		$result = "";
+		foreach ($arr as $key => $value) {
+			if($value != ""){
+				$result .= json_encode($value).',';
+			}
+		}
+		return rtrim($result, ",");
+	}
+
 
 
 
